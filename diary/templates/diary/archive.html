@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Архив целей</h2>
+
+<div class="list-group">
+    {% for goal in archived_goals %}
+        <div class="list-group-item">
+            <h5>{{ goal.title }}</h5>
+            <p>{{ goal.description }}</p>
+            <small>Создано: {{ goal.created_at }}</small>
+            <a href="{% url 'unarchive_goal' goal.id %}" class="btn btn-secondary btn-sm">Вернуть в работу</a>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

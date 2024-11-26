@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Добавить запись{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <h1 class="text-center mb-4">Добавить запись</h1>
+        <form method="post" class="bg-light p-4 border rounded">
+            <div class="mb-3">
+                <label for="{{ form.gratitude.id_for_label }}">Благодарности дня</label><br>
+                {{ form.gratitude }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.achievements.id_for_label }}">Главные достижения дня</label><br>
+                {{ form.achievements }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.thoughts.id_for_label }}">Цели на завтрашний день</label><br>
+                {{ form.thoughts }}
+            </div>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary w-100">Сохранить</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
