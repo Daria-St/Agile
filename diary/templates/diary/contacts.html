@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Контакты</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Связаться с нами</h4>
+            <p>Если у вас есть вопросы или предложения, вы можете связаться с нами через следующие каналы:</p>
+            <ul class="list-unstyled">
+                <li><strong>Email:</strong> ph.steklova@gmail.com</li>
+                <li><strong>Телефон:</strong> +7 (977) 510-7418</li>
+                <li><strong>Адрес:</strong> г. Екатеринбург, ул. Фурманова, д. 57, "Академия TOP"</li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h4>Отправить сообщение</h4>
+            <form action="{% url 'contacts' %}" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+<!--                    <label for="name" class="form-label">Ваше имя</label>-->
+                    <label for="{{ form.name.id_for_label }}">Ваше имя</label><br>
+<!--                    <input type="text" class="form-control" id="name" placeholder="Введите ваше имя">-->
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+<!--                    <label for="email" class="form-label">Ваш Email</label>-->
+<!--                    <input type="email" class="form-control" id="email" placeholder="Введите ваш email">-->
+                    <label for="{{ form.email.id_for_label }}">Ваш email</label><br>
+                    {{ form.email }}
+                </div>
+                <div class="mb-3">
+<!--                    <label for="message" class="form-label">Сообщение</label>-->
+<!--                    <textarea class="form-control" id="message" rows="4" placeholder="Введите ваше сообщение"></textarea>-->
+                     <label for="{{ form.text.id_for_label }}">Сообщение</label><br>
+                    {{ form.text }}
+                </div>
+                <button type="submit" class="btn btn-dark">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

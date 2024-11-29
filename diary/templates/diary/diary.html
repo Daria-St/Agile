@@ -24,14 +24,18 @@
             <ul class="list-group" id="task-list">
                 {% for task in goal.tasks.all %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-
                     {% if task.status == 'Uncompleted' %}
-                    <span>{{ task.title }}</span>
-                    <a href="{% url 'task_complete' task.id %}" class="btn btn-sm btn-outline-success">✅</a>
+
+                    <a href="{% url 'task_complete' task.id %}" class="btn btn-sm btn-outline-success m-1">✅</a>
+                    <span class = "flex-grow-1">{{ task.title }}</span>
+                    <a href="{% url 'task_del' task.id %}" class="btn btn-sm btn-outline-success">Удалить️</a>
 
                     {% elif task.status == 'Completed' %}
-                    <span><p><del>{{ task.title }} </del></p></span>
-                    <a href="{% url 'task_uncomplete' task.id %}" class="btn btn-sm btn-outline-success">✖️</a>
+
+                    <a href="{% url 'task_uncomplete' task.id %}" class="btn btn-sm btn-outline-success m-1">✖️</a>
+                    <span class = "flex-grow-1"><del>{{ task.title }} </del></span>
+                    <a href="{% url 'task_del' task.id %}" class="btn btn-sm btn-outline-success">Удалить️</a>
+
                     {% endif %}
                 </li>
                 {% endfor %}

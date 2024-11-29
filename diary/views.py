@@ -3,7 +3,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import DayEntry, Goal, Task
-from .forms import DayEntryForm, GoalForm, TaskAddForm, RegisterForm
+from .forms import DayEntryForm, GoalForm, TaskAddForm, RegisterForm, FeedbackAddForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.shortcuts import get_object_or_404
@@ -147,6 +147,7 @@ def archive_view(request):
     return render(request, 'diary/archive.html', {'archived_goals': archived_goals})
 
 
+
 # РЕДАКТИРОВАНИЕ ПОСТОВ
 @login_required
 def goal_edit(request, goal_id):
@@ -200,6 +201,13 @@ def task_add(request):
                                 )
             return redirect('diary')
 
+
+def task_del(request, task_id):
+    task = Task.objects.get(id=task_id)
+    task.delete()
+
+    return redirect('diary')
+
 def task_complete(request, task_id):
     task = get_object_or_404(Task, id=task_id)
 
@@ -246,4 +254,25 @@ def register(request):
 
     return render(request, 'diary/auth_form.html', context)
 
+
+
+def feedback_add(request):
+    form = FeedbackAddForm()
+    if request.method == "POST":
+        form = FeedbackAddForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('feedback_done')
+
+    context = {
+        'form' : form
+    }
+
+    return render(request, 'diary/contacts.html', context)
+
+
+
+def feedback_done(request):
+    return render(request, 'diary/feedback_done.html')
 

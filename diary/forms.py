@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 
-from .models import DayEntry, Goal
+from .models import DayEntry, Goal, Feedback
 
 class DayEntryForm(forms.ModelForm):
     class Meta:
@@ -80,3 +80,18 @@ class RegisterForm(forms.Form):
 
         return username
 
+class FeedbackAddForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ['name', 'email', 'text']
+
+    def __init__(self, *args, **kwargs):
+        super(FeedbackAddForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+    #
+    # def clean_name(self):
+    #     name = self.cleaned_data['name'].split()
+    #     if len(name) != 2:
+    #         raise ValidationError('Некорректный ввод имени')
+    #     return name

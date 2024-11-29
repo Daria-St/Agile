@@ -5,3 +5,4 @@ from .models import *
 admin.site.register(Goal)
 admin.site.register(DayEntry)
 admin.site.register(Task)
+admin.site.register(Feedback)
