@@ -18,12 +18,10 @@ urlpatterns = [
     path('goal/<int:goal_id>/edit', goal_edit, name='goal_edit'),
     path('entry/<int:entry_id>/edit', entry_edit, name='entry_edit'),
     path('archive/', views.archive_view, name='archive'),
-
     path('task_add', task_add, name='task_add'),
     path('goal/tasks/<int:task_id>/task_del', task_del, name='task_del'),
     path('goal/tasks/<int:task_id>/complete', task_complete, name='task_complete'),
     path('goal/tasks/<int:task_id>/uncomplete', task_uncomplete, name='task_uncomplete'),
-
     path('contacts/', views.feedback_add, name='contacts'),
     path('contacts_done/', feedback_done, name='feedback_done'),
 

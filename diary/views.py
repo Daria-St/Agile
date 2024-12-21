@@ -8,18 +8,14 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.shortcuts import get_object_or_404
 
-
 def home(request):
     return render(request, 'diary/home.html')
 
-"""предыдущая форма регистрации, сейчас не используется"""
 def register_view(request):
     form = UserCreationForm(request.POST or None)
     if form.is_valid():
         form.save()
-        # Здесь можно добавить логику для автоматического входа
         return redirect('login')  # Перенаправление после успешной регистрации
-
     context = {
         'form': form,
         'title': 'Регистрация',
@@ -33,7 +29,6 @@ def login_view(request):
         user = form.get_user()
         login(request, user)
         return redirect('diary')  # Перенаправление после успешного входа
-
     context = {
         'form': form,
         'title': 'Вход',
@@ -146,8 +141,6 @@ def archive_view(request):
     archived_goals = Goal.objects.filter(user=request.user, is_archived=True)
     return render(request, 'diary/archive.html', {'archived_goals': archived_goals})
 
-
-
 # РЕДАКТИРОВАНИЕ ПОСТОВ
 @login_required
 def goal_edit(request, goal_id):
@@ -218,12 +211,9 @@ def task_complete(request, task_id):
 
 def task_uncomplete(request, task_id):
     task = get_object_or_404(Task, id=task_id)
-
     task.status = Task.UNCOMPLETED
     task.save()
-
     return redirect('diary')
-
 
 def register(request):
     form = RegisterForm()

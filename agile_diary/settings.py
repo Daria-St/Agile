@@ -126,3 +126,5 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'diary'
 
+HOST = 'http://agilediary.na4u.ru'
+STATIC_ROOT = '/home/c98440/agilediary.na4u.ru/www/static'
